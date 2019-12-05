@@ -36,10 +36,12 @@ const ListControls = () => {
 
 	return (
 		<div className='list-controls'>
+
 			<Button onClick={goBack} disabled={page<=1}>
 				<i className="material-icons">keyboard_arrow_left</i>
 				<span>Back</span>
 			</Button>
+
 			<FormControl className='count-select'>
 				<InputLabel id="demo-simple-select-label">Jobs on page</InputLabel>
 				<Select
@@ -56,6 +58,7 @@ const ListControls = () => {
 				<span>Next</span>
 				<i className="material-icons">keyboard_arrow_right</i>
 			</Button>
+
 		</div>
 	);
 };
