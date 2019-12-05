@@ -1,24 +1,26 @@
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
 const fetch = require('node-fetch');
 
 const baseURL = 'https://jobs.github.com/positions.json';
-const allJobs = [];
 
 const dbUrl = 'mongodb://localhost:27017';
 const dbName = 'jobs';
-const client = new MongoClient(dbUrl, {
-	useUnifiedTopology: true,
-	useNewUrlParser: true
-});
 
-const insertDocuments = async (db) => {
+const insertDocuments = async (jobs) => {
+	const client = new MongoClient(dbUrl, {
+		useUnifiedTopology: true,
+		useNewUrlParser: true
+	});
+	await client.connect();
+	const db = client.db(dbName);
 	const collection = db.collection('jobs');
 	await collection.deleteMany({});
-	await collection.insertMany(allJobs);
+	const result = await collection.insertMany(jobs);
+	await client.close();
+	return result;
 };
 
-const getJobs = async (page) => {
+const fetchJobs = async (page, allJobs) => {
 	const currentPage = ++page;
 	const path = baseURL + '?page=' + currentPage;
 	const response = await fetch(path);
@@ -27,24 +29,26 @@ const getJobs = async (page) => {
 		job.source = 'github';
 		return job
 	});
-	// console.log(path, jobs.length);
 	if (jobs.length) {
 		allJobs.push(...jobsWithSource);
-		await getJobs(currentPage);
+		await fetchJobs(currentPage, allJobs);
 	}
+	return allJobs;
 };
 
-async function run() {
-	console.log('Start fetching jobs from GitHub...');
-	await getJobs(0);
-	await client.connect();
-	const db = client.db(dbName);
-	console.log('Total jobs: ', allJobs.length);
-	await insertDocuments(db);
-	await client.close();
+async function getGitHubJobs() {
+	console.log('Start fetching jobs from GitHub Jobs...');
+	const jobs = await fetchJobs(0, []);
+	console.log(`${jobs.length} jobs found.`);
+	const dbResult = await insertDocuments(jobs);
+	if (dbResult.result.ok === 1)
+		console.log(`Successfully wrote ${dbResult.insertedCount} jobs to the database.`);
+	console.log('>----------------<>----------------<');
 }
 
-module.exports = run;
+module.exports = getGitHubJobs;
+
+module.exports();
 
 
 

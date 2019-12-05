@@ -1,13 +1,11 @@
-import React, {ReactElement, useReducer, useMemo, useState} from 'react';
-import './App.css';
+import React, { useReducer, useState} from 'react';
+import './App.scss';
 
-import Header from "./components/Header/Header";
 import JobsList from "./components/JobsList/JobsList";
 import JobThumbnail from "./components/JobThumbnail/JobThumbnail";
 import ListControls from "./components/ListControls/ListControls";
 import FullJob from "./components/JobModal/JobModal";
 
-import jobsMock from './assets/mocks/jobs';
 import JobContext from "./contexts/jobContext";
 import Paper from "@material-ui/core/Paper";
 

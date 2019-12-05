@@ -36,14 +36,14 @@ const JobThumbnail = (props) => {
 	return (
 		<div className='job-thumbnail'>
 			<div className="job-thumbnail-top">
-				<Typography variant="h4" component='span' className='job-thumbnail-title'>
+				<Typography variant="h6" component='span' className='job-thumbnail-title'>
 					{jobInfo.title}
 				</Typography>
-				<Typography variant="h6" component='span' className='job-thumbnail-type'>
+				<Typography variant="subtitle1" component='span' className='job-thumbnail-type'>
 					{jobInfo.type}
 				</Typography>
 			</div>
-			<Typography variant="h6" component='span' className='job-thumbnail-location'>
+			<Typography variant="subtitle1" component='span' className='job-thumbnail-location'>
 				{jobInfo.location}
 			</Typography>
 			<div className="job-thumbnail-bottom">
