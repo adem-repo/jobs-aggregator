@@ -1,0 +1,17 @@
+.list-controls {
+	position: fixed;
+	display: flex;
+	margin: 16px auto 0;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	box-sizing: border-box;
+	background-color: white;
+	border-top: 1px solid grey;
+	justify-content: space-between;
+
+	.count-select {
+		flex: 0 0 30%;
+		margin: 0 16px;
+	}
+}

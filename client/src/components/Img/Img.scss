@@ -1,0 +1,27 @@
+@import "../../assets/styles/variables";
+
+.image-wrapper {
+
+	position: relative;
+
+	.curtain {
+		position: absolute;
+		width: 150px;
+		height: 20px;
+		margin-left: 4px;
+		background-color: $super-light-gray;
+		opacity: 0;
+		transition: opacity .4s ease-out;
+	}
+
+	img {
+
+	}
+
+	&.loading {
+
+		.curtain {
+			opacity: 1;
+		}
+	}
+}
