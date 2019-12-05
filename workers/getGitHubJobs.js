@@ -21,9 +21,8 @@ const insertDocuments = async (jobs) => {
 };
 
 const fetchJobs = async (page, allJobs) => {
-	const currentPage = ++page;
-	const path = baseURL + '?page=' + currentPage;
-	const response = await fetch(path);
+	const url = `${baseURL}?page=${page}`;
+	const response = await fetch(url);
 	const jobs = await response.json();
 	const jobsWithSource = jobs.map( job => {
 		job.source = 'github';
@@ -31,14 +30,14 @@ const fetchJobs = async (page, allJobs) => {
 	});
 	if (jobs.length) {
 		allJobs.push(...jobsWithSource);
-		await fetchJobs(currentPage, allJobs);
+		await fetchJobs(++page, allJobs);
 	}
 	return allJobs;
 };
 
 async function getGitHubJobs() {
 	console.log('Start fetching jobs from GitHub Jobs...');
-	const jobs = await fetchJobs(0, []);
+	const jobs = await fetchJobs(1, []);
 	console.log(`${jobs.length} jobs found.`);
 	const dbResult = await insertDocuments(jobs);
 	if (dbResult.result.ok === 1)
@@ -47,8 +46,5 @@ async function getGitHubJobs() {
 }
 
 module.exports = getGitHubJobs;
-
-module.exports();
-
 
 
