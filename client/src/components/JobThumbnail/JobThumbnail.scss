@@ -1,20 +1,16 @@
 @import "../../assets/styles/variables";
 
-.job {
+.job-thumbnail {
 	padding: 8px;
 	box-sizing: border-box;
-	border: 1px solid #d4d4d4;
+	//border: 1px solid #d4d4d4;
 	cursor: pointer;
 
-	&:not(:last-child) {
-		margin-bottom: 16px;
-	}
-
-	.job-top {
+	.job-thumbnail-top {
 		display: flex;
 		align-items: flex-end;
 
-		.job-title {
+		.job-thumbnail-title {
 			font-size: 20pt;
 			color: $main-color;
 			text-overflow: ellipsis;
@@ -23,7 +19,7 @@
 			overflow: hidden;
 		}
 
-		.job-type {
+		.job-thumbnail-type {
 			flex: 0 0;
 			flex-basis: auto;
 			margin-left: auto;
@@ -32,7 +28,7 @@
 		}
 	}
 
-	.job-location {
+	.job-thumbnail-location {
 		display: inline-block;
 		color: $main-color;
 		text-overflow: ellipsis;
@@ -41,7 +37,7 @@
 		width: 100%;
 	}
 
-	.job-bottom {
+	.job-thumbnail-bottom {
 
 		display: flex;
 
@@ -73,7 +69,7 @@
 			}
 		}
 
-		.job-date {
+		.job-thumbnail-date {
 			margin-left: auto;
 			font-size: 10pt;
 			color: $main-color;

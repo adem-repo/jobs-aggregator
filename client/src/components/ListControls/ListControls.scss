@@ -12,6 +12,10 @@
 	border-top: 1px solid $light-gray;
 	justify-content: space-between;
 
+	button {
+		color: $main-color;
+	}
+
 	.count-select {
 		flex: 0 0 30%;
 		margin: 0 16px;

@@ -5,84 +5,45 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from "@material-ui/core/Typography";
+import Divider from '@material-ui/core/Divider';
 
-import Link from "@material-ui/core/Link";
+import './JobModal.scss';
 
-import Job from "../Job/Job";
+import JobThumbnail from "../JobThumbnail/JobThumbnail";
 
 const FullJob = (props) => {
 
-	const companyElement = () => {
-		const companyLogo =
-			props.job.company_logo ?
-				<img className='company-logo' src={props.job.company_logo} alt=""/> :
-				null;
-		// const companyTitle =
-		// 	jobInfo.company ?
-		// 		<Typography
-		// 			variant="subtitle2"
-		// 			component='span'
-		// 		>
-		// 			{jobInfo.company}
-		// 		</Typography> :
-		// 		null;
-		const companyUrl = props.job.company_url ? props.job.company_url : undefined;
-		return (
-			<div className="company">
-				<Link href={companyUrl}>
-					{companyLogo}
-				</Link>
-			</div>
-
-		);
-	};
-
-	const [weekday, month, day] = props.job.created_at.split(' ');
-	const dateStr = [weekday, month, day].join(' ');
-
 	return (
-		<div>
-			<Dialog
-				fullScreen
-				open={props.open}
-				onClose={props.clickClose}
-				aria-labelledby="alert-dialog-title"
-				aria-describedby="alert-dialog-description"
-			>
-				<DialogTitle id="alert-dialog-title" disableTypography={true}>
-					{/*<div className='modal-title-top'>*/}
-					{/*	<Typography variant='h5' className='job-modal-title'>*/}
-					{/*		{props.job.title}*/}
-					{/*	</Typography>*/}
-					{/*</div>*/}
-					{/*<div className="modal-title-bottom">*/}
-					{/*	{companyElement()}*/}
-					{/*	<Typography variant="subtitle1">*/}
-					{/*		{props.job.type}*/}
-					{/*	</Typography>*/}
-					{/*	<Typography variant="subtitle1">*/}
-					{/*		{dateStr}*/}
-					{/*	</Typography>*/}
-					{/*</div>*/}
-					<Job jobInfo={props.job}/>
-				</DialogTitle>
-				<DialogContent>
-					<DialogContentText
-						id="alert-dialog-description"
-						dangerouslySetInnerHTML={{__html: props.job.description}}
-					></DialogContentText>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={props.clickClose} color="primary">
-						Decline
-					</Button>
-					<Button onClick={props.clickClose} color="primary" autoFocus>
-						Apply
-					</Button>
-				</DialogActions>
-			</Dialog>
-		</div>
+		<Dialog
+			fullScreen
+			className='job-full'
+			open={props.open}
+			onClose={props.clickClose}
+			aria-labelledby="alert-dialog-title"
+			aria-describedby="alert-dialog-description"
+		>
+			<DialogTitle id="alert-dialog-title" disableTypography={true}>
+				<JobThumbnail jobInfo={props.job}/>
+			</DialogTitle>
+			<DialogContent>
+				<DialogContentText
+					id="alert-dialog-description"
+					className='job-full-description'
+					dangerouslySetInnerHTML={{__html: props.job.description}}>
+				</DialogContentText>
+				<Divider/>
+				<DialogContentText
+					className='job-full-apply'
+					dangerouslySetInnerHTML={{__html: props.job.how_to_apply}}>
+				</DialogContentText>
+			</DialogContent>
+			<DialogActions className='job-full-actions'>
+				<Button onClick={props.clickClose} color="primary">
+					<i className="material-icons">keyboard_arrow_left</i>
+					<span>Back</span>
+				</Button>
+			</DialogActions>
+		</Dialog>
 	);
 };
 

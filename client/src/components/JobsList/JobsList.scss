@@ -1,3 +1,13 @@
+@import '../../assets/styles/variables';
+
 .jobs-list {
 	margin-bottom: 49px;
+
+	.job-list-item {
+		border: 1px solid $light-gray;
+
+		&:not(:last-child) {
+			margin-bottom: 16px;
+		}
+	}
 }

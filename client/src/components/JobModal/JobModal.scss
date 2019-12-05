@@ -1,0 +1,25 @@
+@import '../../assets/styles/variables';
+
+.job-full {
+
+	overflow: hidden;
+
+	.job-thumbnail {
+		padding: 0;
+	}
+
+	.job-full-description {
+		p:first-child {
+			margin-top: 0;
+		}
+	}
+
+	.job-full-apply {
+		word-break: break-all;
+	}
+
+	.job-full-actions {
+		border-top: 1px solid $light-gray
+	}
+
+}

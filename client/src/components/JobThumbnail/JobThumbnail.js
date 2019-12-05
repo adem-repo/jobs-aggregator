@@ -1,11 +1,10 @@
-import React, {Suspense} from 'react';
+import React from 'react';
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 
 import Img from "../Img/Img";
-import './Job.scss';
+import './JobThumbnail.scss';
 
-const Job = (props) => {
+const JobThumbnail = (props) => {
 
 	const {jobInfo} = props;
 
@@ -24,7 +23,6 @@ const Job = (props) => {
 					{jobInfo.company}
 				</Typography> :
 				null;
-		// const companyUrl = jobInfo.company_url ? jobInfo.company_url : undefined;
 		return (
 			<span className='company'>
 				at {companyLogo ? companyLogo : companyTitle ? companyTitle : null}
@@ -35,36 +33,27 @@ const Job = (props) => {
 	const [weekday, month, day] = jobInfo.created_at.split(' ');
 	const dateStr = [weekday, month, day].join(' ');
 
-	// const description = <Typography variant='body1' dangerouslySetInnerHTML={{__html: jobInfo.description}}></Typography>
-
-	// const location = jobInfo.location ?
-	// 	<Typography variant='button' component='span' className='location'>
-	// 		{jobInfo.location}
-	// 	</Typography> :
-	// 	null;
-
 	return (
-		<React.Fragment>
-			<div className="job-top">
-				<Typography variant="h4" component='span' className='job-title'>
+		<div className='job-thumbnail'>
+			<div className="job-thumbnail-top">
+				<Typography variant="h4" component='span' className='job-thumbnail-title'>
 					{jobInfo.title}
 				</Typography>
-
-				<Typography variant="h6" component='span' className='job-type'>
+				<Typography variant="h6" component='span' className='job-thumbnail-type'>
 					{jobInfo.type}
 				</Typography>
 			</div>
-			<Typography variant="h6" component='span' className='job-location'>
+			<Typography variant="h6" component='span' className='job-thumbnail-location'>
 				{jobInfo.location}
 			</Typography>
-			<div className="job-bottom">
+			<div className="job-thumbnail-bottom">
 				{companyElement()}
-				<Typography variant="subtitle2" component='span' className='job-date'>
+				<Typography variant="subtitle2" component='span' className='job-thumbnail-date'>
 					{dateStr}
 				</Typography>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 
-export default Job;
+export default JobThumbnail;
