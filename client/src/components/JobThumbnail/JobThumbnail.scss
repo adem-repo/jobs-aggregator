@@ -44,6 +44,7 @@
 		.company {
 
 			display: flex;
+			flex: 1;
 			max-width: 75%;
 			color: $main-color;
 
@@ -55,13 +56,15 @@
 
 
 			.company-logo {
-				height: 20px;
+				max-height: 1.5em;
+				max-width: 100%;
 				margin-left: 4px;
 			}
 
 			.company-title {
 				display: inline-block;
 				margin-left: 6px;
+				font-size: 0.975rem;
 				color: $dark-blue;
 				text-overflow: ellipsis;
 				white-space: nowrap;

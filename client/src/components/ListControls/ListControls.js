@@ -39,7 +39,7 @@ const ListControls = () => {
 
 			<Button onClick={goBack} disabled={page<=1}>
 				<i className="material-icons">keyboard_arrow_left</i>
-				<span>Back</span>
+				<span>Prev</span>
 			</Button>
 
 			<FormControl className='count-select'>

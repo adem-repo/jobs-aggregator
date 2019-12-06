@@ -25,7 +25,7 @@ const JobThumbnail = (props) => {
 				null;
 		return (
 			<span className='company'>
-				at {companyLogo ? companyLogo : companyTitle ? companyTitle : null}
+				<span>at</span>{companyLogo ? companyLogo : companyTitle ? companyTitle : null}
 			</span>
 		);
 	};
