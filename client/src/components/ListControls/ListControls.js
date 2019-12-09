@@ -13,7 +13,14 @@ import './ListControls.scss';
 
 const ListControls = () => {
 
-	const {state: { query: {page, limit}, isNext}, dispatch} = useContext(AppContext);
+	const {
+		state: {
+			query: {
+				page, limit
+			},
+			isNext,
+			isLoading,
+		}, dispatch} = useContext(AppContext);
 
 	const goBack = () => {
 		if (page <= 1)
@@ -37,7 +44,7 @@ const ListControls = () => {
 	return (
 		<div className='list-controls'>
 
-			<Button onClick={goBack} disabled={page<=1}>
+			<Button onClick={goBack} disabled={page <= 1  || isLoading}>
 				<i className="material-icons">keyboard_arrow_left</i>
 				<span>Prev</span>
 			</Button>
@@ -54,7 +61,7 @@ const ListControls = () => {
 				</Select>
 			</FormControl>
 
-			<Button onClick={goForward} disabled={!isNext}>
+			<Button onClick={goForward} disabled={!isNext || isLoading}>
 				<span>Next</span>
 				<i className="material-icons">keyboard_arrow_right</i>
 			</Button>

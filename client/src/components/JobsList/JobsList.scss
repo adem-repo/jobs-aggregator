@@ -1,8 +1,8 @@
 @import '../../assets/styles/variables';
 
 .jobs-list {
-	margin: 41px 0 49px;
 	padding: 16px;
+	overflow-y: auto;
 
 	.job-list-item {
 		border: 1px solid $light-gray;

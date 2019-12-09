@@ -1,9 +1,8 @@
 @import '../../assets/styles/variables';
 
 .list-controls {
-	position: fixed;
 	display: flex;
-	margin: 16px auto 0;
+	flex: 0 0 auto;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -15,6 +14,11 @@
 
 	button {
 		color: $main-color;
+		transition: color .4s ease;
+
+		&:disabled {
+			transition: color .4s ease;
+		}
 	}
 
 	.count-select {

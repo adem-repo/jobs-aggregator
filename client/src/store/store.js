@@ -9,6 +9,8 @@ export const initialState = {
 	isNext: false,
 	isFilterOpen: false,
 
+	isLoading: false,
+
 	query: {
 		page: 1,
 		limit: limits[0],

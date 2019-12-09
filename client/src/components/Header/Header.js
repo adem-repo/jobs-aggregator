@@ -6,7 +6,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 
 import AppContext from '../../contexts/appContext';
-import { switchFilterAction } from "../../store/actions";
+import { switchFilterAction, setQueryAction } from "../../store/actions";
 
 import './Header.scss';
 
@@ -44,6 +44,7 @@ const Header = () => {
 
 	const handleSearchButtonClick = async () => {
 		dispatch(switchFilterAction(false));
+		dispatch(setQueryAction(formFieldsState));
 	};
 
 	return (
