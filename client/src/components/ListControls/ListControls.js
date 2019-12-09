@@ -1,37 +1,37 @@
-import React, {useState, useContext} from 'react';
+import React, { useContext } from 'react';
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import AppContext from '../../contexts/appContext';
+import { limits } from "../../const";
+import { setQueryAction } from "../../store/actions";
+
 import './ListControls.scss';
-import {useJobs} from "../../hooks/useJobsHook";
-import JobContext from '../../contexts/jobContext';
 
 const ListControls = () => {
 
-	const limits = [20, 50, 100];
-	const [page, setPage] = useState(1);
-	const [limit, setLimit] = useState(limits[0]);
-	const {state} = useContext(JobContext);
-
-	useJobs(`?page=${page}&limit=${limit}`);
+	const {state: { query: {page, limit}, isNext}, dispatch} = useContext(AppContext);
 
 	const goBack = () => {
 		if (page <= 1)
 			return;
 		const newPage = page - 1;
-		setPage(newPage);
+		dispatch(setQueryAction({page: newPage}));
 	};
 
 	const goForward = () => {
 		const newPage = page + 1;
-		setPage(newPage);
+		dispatch(setQueryAction({page: newPage}));
 	};
 
-	const handleChange = (event) => {
-		setLimit(+event.target.value);
-		setPage(1);
+	const handleLimitChange = (event) => {
+		dispatch(setQueryAction({
+			limit: +event.target.value,
+			page: 1
+		}));
 	};
 
 	return (
@@ -48,13 +48,13 @@ const ListControls = () => {
 					labelId="demo-simple-select-label"
 					id="demo-simple-select"
 					value={limit}
-					onChange={handleChange}
+					onChange={handleLimitChange}
 				>
 					{limits.map( el => <MenuItem key={el} value={el}>{el}</MenuItem>)}
 				</Select>
 			</FormControl>
 
-			<Button onClick={goForward} disabled={!state.isNext}>
+			<Button onClick={goForward} disabled={!isNext}>
 				<span>Next</span>
 				<i className="material-icons">keyboard_arrow_right</i>
 			</Button>

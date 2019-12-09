@@ -1,19 +1,31 @@
 import {useEffect, useContext} from "react";
 import axios from "axios";
-import JobContext from "../contexts/jobContext";
 
-export function useJobs(query) {
-	const {state, dispatch} = useContext(JobContext);
-	const baseURL = 'http://localhost:3020';
+import AppContext from "../contexts/appContext";
+import {updateJobsAction} from '../store/actions'
+
+export function useJobs() {
+	const {state, dispatch} = useContext(AppContext);
+	const apiURL = 'http://localhost:3020/?';
+	let queryStr = Object.keys(state.query)
+		.reduce((totalQuery, key, i, arr) => {
+			if (state.query[key] !== null) {
+				let parameter = `${key}=${state.query[key]}`;
+				return `${totalQuery}${parameter}&`
+			}
+			return totalQuery
+		}, apiURL);
 
 	useEffect(() => {
-		axios.get(baseURL + query).then(
+		console.log('loading...', queryStr);
+		axios.get(queryStr).then(
 			response => {
+				console.log('load finished');
 				const {jobs, isNext} = response.data;
-				dispatch({type: 'UPDATE', payload: {jobs, isNext}});
+				dispatch(updateJobsAction({jobs, isNext}));
 			}
 		);
-	}, [query, dispatch]);
+	}, [queryStr, dispatch]);
 
 	return state
 }

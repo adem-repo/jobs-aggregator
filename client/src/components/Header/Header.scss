@@ -1,20 +1,86 @@
 @import '../../assets/styles/variables';
 
 .header	{
-	display: flex;
-	margin-bottom: 16px;
-	border-bottom: 1px solid $light-gray;
 
-	i {
-		color: $main-color;
-		cursor: pointer;
-	}
-
-	.search {
-
-	}
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: inherit;
+	margin: 0 auto;
+	padding: 8px 16px;
+	box-sizing: border-box;
+	border-bottom: 1px solid #BCBEC0;
+	background-color: white;
+	justify-content: space-between;
+	z-index: 2;
+	overflow: hidden;
 
 	.sort {
+		display: flex;
 		margin-left: auto;
+
+		flex-direction: column;
+		justify-content: space-around;
+
+		width: 20px;
+		height: 20px;
+
+		div {
+			height: 2px;
+			background: $light-gray;
+			width: 66%;
+			transform-origin: left;
+
+			transition:
+					opacity .4s ease-out,
+					transform .4s ease-out,
+					width .4s ease-out;
+
+			&:first-child {
+				width: 100%;
+			}
+
+			&:last-child {
+				width: 33%;
+			}
+		}
+	}
+
+	.filter {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		transition: max-height .4s ease-out, opacity .4s ease-out;
+		max-height: 0;
+		opacity: 0;
+	}
+
+	&.opened {
+
+		box-shadow: 0 0 8px -1px grey;
+
+		.sort {
+			div {
+				opacity: 0;
+
+				&:first-child {
+					opacity: 1;
+					transform: rotate(45deg);
+				}
+
+				&:last-child {
+					opacity: 1;
+					transform: rotate(-45deg);
+					width: 100%;
+				}
+			}
+		}
+
+		.filter {
+			max-height: 15em;
+			opacity: 1;
+		}
+
 	}
 }

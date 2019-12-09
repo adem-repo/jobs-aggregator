@@ -1,0 +1,18 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity .4s, visibility .4s;
+	transition-timing-function: ease-out;
+	visibility: hidden;
+
+	&.open {
+		opacity: .3;
+		visibility: visible;
+	}
+
+}

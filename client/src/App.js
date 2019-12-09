@@ -1,63 +1,53 @@
-import React, { useReducer, useState} from 'react';
-import './App.scss';
+import React, {useContext} from 'react';
+import Paper from "@material-ui/core/Paper";
 
+import Header from "./components/Header/Header";
 import JobsList from "./components/JobsList/JobsList";
 import JobThumbnail from "./components/JobThumbnail/JobThumbnail";
 import ListControls from "./components/ListControls/ListControls";
 import FullJob from "./components/JobModal/JobModal";
+import Overlay from "./components/Overlay/Overlay";
 
-import JobContext from "./contexts/jobContext";
-import Paper from "@material-ui/core/Paper";
+import {setOpenedJobAction} from './store/actions';
+import {useJobs} from "./hooks/useJobsHook";
+import AppContext from "./contexts/appContext";
 
-function jobsReducer(state, {type, payload: {jobs, isNext}}) {
-	switch (type) {
-		case 'UPDATE':
-			return {jobs, isNext};
-		default:
-			return state;
-	}
-}
+import './App.scss';
 
 const App = () => {
 
-	const [openJob, setOpenJob] = useState(false);
-	const [openedJob, setOpenedJob] = useState(null);
-	const [state, dispatch] = useReducer(jobsReducer, {
-		jobs: [],
-		isNext: false
-	});
+	const {state, dispatch} = useContext(AppContext);
+
+	useJobs();
 
 	let jobsComponents = [];
 	if (state.jobs.length)
 		jobsComponents = state.jobs.map(
 			job => (
-				<Paper className="job-list-item" onClick={() => {
-					setOpenJob(true);
-					setOpenedJob(job);
+				<Paper className="job-list-item" key={job.id} onClick={() => {
+					dispatch(setOpenedJobAction(job));
 				}}>
-					<JobThumbnail key={job.id} jobInfo={job}/>
+					<JobThumbnail jobInfo={job}/>
 				</Paper>
 			)
 		);
 
 	let fullJob = null;
-	if (openedJob)
-	    fullJob = <FullJob
-            open={openJob}
-            job={openedJob}
-            clickClose={() => setOpenJob(false)}/>
-
+	if (state.openedJob)
+		fullJob = <FullJob
+			open={state.openedJob !== null}
+			job={state.openedJob}
+			clickClose={() => dispatch(setOpenedJobAction(null))}/>;
 
 	return (
 		<div className="app">
-			{/*<Header />*/}
+			<Header/>
 			<JobsList>
 				{jobsComponents}
 			</JobsList>
-			<JobContext.Provider value={{state, dispatch}}>
-				<ListControls/>
-			</JobContext.Provider>
-            {fullJob}
+			<ListControls/>
+			{fullJob}
+			<Overlay/>
 		</div>
 	);
 };
