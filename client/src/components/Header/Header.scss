@@ -1,6 +1,7 @@
 @import '../../assets/styles/variables';
+@import '../../assets/styles/animation';
 
-.header	{
+.header {
 	position: relative;
 	flex: 0 0 auto;
 	width: inherit;
@@ -13,9 +14,23 @@
 	z-index: 2;
 
 	.header-top {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		.title {
+			height: 28px;
+		}
+
+		.title-common, .title-filter {
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: opacity .4s ease-out;
+		}
+
+		@include transition-animation('title-anim');
 	}
 
 	.sort {
@@ -33,10 +48,9 @@
 			width: 66%;
 			transform-origin: left;
 
-			transition:
-					opacity .4s ease-out,
-					transform .4s ease-out,
-					width .4s ease-out;
+			transition: opacity .4s ease-out,
+			transform .4s ease-out,
+			width .4s ease-out;
 
 			&:first-child {
 				width: 100%;
@@ -52,10 +66,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		transition:
-				max-height .4s ease-out,
-				opacity .4s ease-out,
-				visibility .4s ease-out;
+		transition: max-height .4s ease-out,
+		opacity .4s ease-out,
+		visibility .4s ease-out;
 		max-height: 0;
 		opacity: 0;
 		visibility: hidden;

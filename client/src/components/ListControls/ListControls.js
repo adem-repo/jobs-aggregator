@@ -49,7 +49,7 @@ const ListControls = () => {
 				<span>Prev</span>
 			</Button>
 
-			<FormControl className='count-select'>
+			<FormControl className='count-select' disabled={isLoading}>
 				<InputLabel id="demo-simple-select-label">Jobs on page</InputLabel>
 				<Select
 					labelId="demo-simple-select-label"

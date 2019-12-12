@@ -1,4 +1,5 @@
 @import '../../assets/styles/variables';
+@import '../../assets/styles/animation';
 
 .jobs-list {
 	padding: 16px;
@@ -37,45 +38,5 @@
 		transition: opacity .4s ease-out;
 	}
 
-
-	.show-appear {
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	.show-active-appear {
-	}
-
-	.show-done-appear {
-		opacity: 1;
-		visibility: visible;
-	}
-
-	.show-enter {
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	.show-active-enter {
-
-	}
-
-	.show-done-enter {
-		opacity: 1;
-	}
-
-	.show-exit {
-		opacity: 1;
-		visibility: visible;
-	}
-
-	.show-active-exit {
-		opacity: 0;
-		//visibility: hidden;
-	}
-
-	.show-done-exit {
-		opacity: 0;
-		visibility: hidden;
-	}
+	@include transition-animation("show");
 }

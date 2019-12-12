@@ -1,0 +1,40 @@
+@mixin transition-animation($className) {
+	/* APPEAR */
+	.#{$className}-appear,
+	.#{$className}-active-appear {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.#{$className}-done-appear {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	/* ENTER */
+	.#{$className}-enter,
+	.#{$className}-active-enter {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.#{$className}-done-enter {
+		opacity: 1;
+	}
+
+	/* EXIT */
+	.#{$className}-exit {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.#{$className}-active-exit {
+		opacity: 0;
+	}
+
+	.#{$className}-done-exit {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+

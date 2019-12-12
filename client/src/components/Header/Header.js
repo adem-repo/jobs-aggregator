@@ -5,6 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {CSSTransition} from "react-transition-group";
 
 import AppContext from '../../contexts/appContext';
 import {switchFilterAction, setQueryAction} from "../../store/actions";
@@ -17,7 +18,7 @@ const Header = () => {
 	const [formFieldsState, setFormFieldsState] = useState({
 		fullTime: false,
 		location: '',
-		title: ''
+		title: '',
 	});
 
 	const headerCSSClasses = cx({
@@ -44,8 +45,10 @@ const Header = () => {
 	};
 
 	const handleConfirm = () => {
-		dispatch(switchFilterAction(false));
-		dispatch(setQueryAction({...formFieldsState, page: 1}));
+		if (formFieldsState.location || formFieldsState.title || formFieldsState.fullTime) {
+			dispatch(switchFilterAction(false));
+			dispatch(setQueryAction({...formFieldsState, page: 1}));
+		}
 	};
 
 	const handleKeyPress = (event) => {
@@ -54,12 +57,47 @@ const Header = () => {
 		}
 	};
 
+	const animationClassPrefix = 'title-anim';
+
+	const animationCSSClassNames = {
+		appear: `${animationClassPrefix}-appear`,
+		appearActive: `${animationClassPrefix}-active-appear`,
+		appearDone: `${animationClassPrefix}-done-appear`,
+		enter: `${animationClassPrefix}-enter`,
+		enterActive: `${animationClassPrefix}-active-enter`,
+		enterDone: `${animationClassPrefix}-done-enter`,
+		exit: `${animationClassPrefix}-exit`,
+		exitActive: `${animationClassPrefix}-active-exit`,
+		exitDone: `${animationClassPrefix}-done-exit`,
+	};
+
 	return (
 		<div className={headerCSSClasses}>
 			<div className="header-top">
-				<Typography variant="subtitle1">
-					{isFilterOpen ? 'Filter' : 'Jobs Aggregator'}
-				</Typography>
+				<div className="title">
+					<CSSTransition
+						in={!isFilterOpen}
+						timeout={400}
+						classNames={animationCSSClassNames}
+						appear
+						unmountOnExit
+					>
+						<Typography variant="subtitle1" className='title-common'>
+							Jobs Aggregator
+						</Typography>
+					</CSSTransition>
+					<CSSTransition
+						in={isFilterOpen}
+						timeout={400}
+						classNames={animationCSSClassNames}
+						appear
+						unmountOnExit
+					>
+						<Typography variant="subtitle1" className='title-filter'>
+							Filter
+						</Typography>
+					</CSSTransition>
+				</div>
 				<div className="sort" onClick={() => dispatch(switchFilterAction(!isFilterOpen))}>
 					<div>{null}</div>
 					<div>{null}</div>
