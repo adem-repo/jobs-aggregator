@@ -3,6 +3,10 @@
 .jobs-list {
 	padding: 16px;
 	overflow-y: auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 
 	.job-list-item {
 		border: 1px solid $light-gray;
@@ -10,5 +14,68 @@
 		&:not(:last-child) {
 			margin-bottom: 16px;
 		}
+	}
+
+	.list-items-wrapper {
+		transition: opacity .4s ease-out;
+	}
+
+	.nothing-found {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: $light-gray;
+		transition: opacity .4s ease-out;
+	}
+
+	.spinner-wrapper {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: opacity .4s ease-out;
+	}
+
+
+	.show-appear {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.show-active-appear {
+	}
+
+	.show-done-appear {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.show-enter {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.show-active-enter {
+
+	}
+
+	.show-done-enter {
+		opacity: 1;
+	}
+
+	.show-exit {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.show-active-exit {
+		opacity: 0;
+		//visibility: hidden;
+	}
+
+	.show-done-exit {
+		opacity: 0;
+		visibility: hidden;
 	}
 }

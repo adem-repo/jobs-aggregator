@@ -4,6 +4,14 @@
 
 	overflow: hidden;
 
+	.job-thumbnail-top {
+		align-items: flex-start;
+
+		.job-thumbnail-title {
+			white-space: normal;
+		}
+	}
+
 	.job-thumbnail {
 		padding: 0;
 	}
@@ -21,5 +29,4 @@
 	.job-full-actions {
 		border-top: 1px solid $light-gray
 	}
-
 }

@@ -8,7 +8,7 @@
 
 	.job-thumbnail-top {
 		display: flex;
-		align-items: flex-end;
+		//align-items: flex-end;
 
 		.job-thumbnail-title {
 			//font-size: 1.5em;
@@ -25,6 +25,7 @@
 			margin-left: auto;
 			font-size: 12pt;
 			color: $main-color;
+			margin-top: 5px;
 		}
 	}
 

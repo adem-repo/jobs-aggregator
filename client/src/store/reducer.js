@@ -34,7 +34,7 @@ const setQueryHandler = (state, action) => {
 		...state,
 		query: {
 			...state.query,
-			...action.payload
+			...action.payload,
 		}
 	}
 };
@@ -42,7 +42,8 @@ const setQueryHandler = (state, action) => {
 const setLoadingStatusHandler = (state, action) => {
 	return {
 		...state,
-		isLoading: action.payload
+		isLoading: action.payload,
+		isFirstLoad: false,
 	}
 };
 

@@ -10,11 +10,12 @@ export const initialState = {
 	isFilterOpen: false,
 
 	isLoading: false,
+	isFirstLoad: true,
 
 	query: {
 		page: 1,
 		limit: limits[0],
-		type: null,
+		title: null,
 		location: null,
 		fullTime: null
 	}

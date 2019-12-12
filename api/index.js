@@ -22,8 +22,17 @@ client.connect((err) => {
 	app.get("/", async (req, res) => {
 
 		let {page, limit} = req.query;
+
+		const searchObj = {};
+		if (req.query.location)
+			searchObj.location = new RegExp(req.query.location, 'i');
+		if (req.query.title)
+			searchObj.title = new RegExp(req.query.title, 'i');
+		if (req.query.type)
+			searchObj.type = 'Full Time';
+
 		const fetchData = async () => {
-			const cursor = await collection.find().skip((+page-1)*+limit).limit(+limit);
+			const cursor = await collection.find(searchObj).skip((+page - 1) * +limit).limit(+limit);
 			const isNext = await cursor.hasNext();
 			const jobs = await cursor.toArray();
 			return [jobs, isNext]
@@ -34,8 +43,12 @@ client.connect((err) => {
 		const [jobs] = await fetchData();
 		page = +page + 1;
 		const [, isNext] = await fetchData();
-
+		// setTimeout(() => {
+		// 	res.send({jobs, isNext});
+		// }, 3000);
 		res.send({jobs, isNext});
+
+
 	});
 
 	const listener = app.listen(port, () => {
